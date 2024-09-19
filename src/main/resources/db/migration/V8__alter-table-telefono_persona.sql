@@ -1,0 +1,1 @@
+alter table telefono_persona ADD activo boolean not null;

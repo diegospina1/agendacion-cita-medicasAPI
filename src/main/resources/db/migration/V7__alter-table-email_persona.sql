@@ -1,0 +1,1 @@
+alter table email_persona ADD activo boolean not null;
