@@ -1,0 +1,1 @@
+alter table consultas add duracion datetime not null;

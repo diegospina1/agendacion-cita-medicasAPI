@@ -1,13 +1,13 @@
 package com.jddi.project.model.paciente.dto;
 
-import com.jddi.project.model.email.dto.RespuestaEmailDTO;
-import com.jddi.project.model.persona.dto.RespuestaPersonaDTO;
-import com.jddi.project.model.telefono.dto.RespuestaTelefonoDTO;
+import com.jddi.project.model.datos.contacto.email.dto.crud.REmailDTO;
+import com.jddi.project.model.datos.persona.dto.RPersonaDTO;
+import com.jddi.project.model.datos.contacto.telefono.dto.crud.RTelefonoDTO;
 
 public record DatosPacienteDTO(
         Long id,
-        RespuestaPersonaDTO paciente,
-        RespuestaEmailDTO correo,
-        RespuestaTelefonoDTO telefono
+        RPersonaDTO paciente,
+        REmailDTO correoPrincipal,
+        RTelefonoDTO telefonoPrincipal
 ) {
 }

@@ -1,0 +1,1 @@
+alter table consultas add especialidad varchar(50) not null;

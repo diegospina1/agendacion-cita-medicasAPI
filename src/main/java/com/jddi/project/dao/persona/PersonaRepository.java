@@ -1,6 +1,6 @@
 package com.jddi.project.dao.persona;
 
-import com.jddi.project.model.persona.Persona;
+import com.jddi.project.model.datos.persona.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

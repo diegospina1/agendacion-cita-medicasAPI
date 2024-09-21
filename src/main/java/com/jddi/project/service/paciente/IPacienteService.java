@@ -1,38 +1,47 @@
 package com.jddi.project.service.paciente;
 
-import com.jddi.project.model.email.dto.ActualizarEmailDTO;
+import com.jddi.project.model.datos.contacto.email.dto.CorreosDTO;
+import com.jddi.project.model.datos.contacto.email.dto.crud.EmailDTO;
+import com.jddi.project.model.paciente.Paciente;
 import com.jddi.project.model.paciente.dto.*;
-import com.jddi.project.model.telefono.dto.ActualizarTelefonoDTO;
+import com.jddi.project.model.paciente.dto.crud.UPacienteDTO;
+import com.jddi.project.model.paciente.dto.crud.CPacienteDTO;
+import com.jddi.project.model.paciente.dto.crud.RPacienteDTO;
+import com.jddi.project.model.datos.contacto.telefono.dto.TelefonosDTO;
+import com.jddi.project.model.datos.contacto.telefono.dto.crud.TelefonoDTO;
 
 import java.util.List;
 
 public interface IPacienteService {
 
-    DatosPacienteDTO crear(CrearPacienteDTO datos);
+    DatosPacienteDTO crear(CPacienteDTO datos);
 
-    List<RespuestaPacienteDTO> listarTodos();
+    List<RPacienteDTO> listarTodos();
 
-    RespuestaPacienteDTO buscarId(Long id);
+    RPacienteDTO buscarId(Long id);
 
-    RespuestaPacienteDTO buscarDocumento(String documento);
+    RPacienteDTO buscarDocumento(String documento);
 
     DatosPacienteDTO detallarPacientePorId(Long id);
 
-    void actualizar(ActualizarPacienteDTO datos);
+    void actualizar(UPacienteDTO datos);
 
     void eliminar(Long id);
 
     void activar(Long id);
 
-    CorreosPacienteDTO buscarCorreosAsociados(Long id);
+    CorreosDTO buscarCorreosAsociados(Long id);
 
-    TelefonosPacienteDTO buscarTelefonosAsociados(Long id);
+    TelefonosDTO buscarTelefonosAsociados(Long id);
 
-    void eliminarTelefonoPersona(Long id, ActualizarTelefonoDTO telefono);
+    void eliminarTelefonoPersona(Long id, TelefonoDTO telefono);
 
-    void eliminarEmailPersona(Long id, ActualizarEmailDTO email);
+    void eliminarEmailPersona(Long id, EmailDTO email);
 
-    TelefonosPacienteDTO buscarTelefonosAsociadosActivos(Long id);
+    TelefonosDTO buscarTelefonosAsociadosActivos(Long id);
 
-    CorreosPacienteDTO buscarCorreosAsociadosActivos(Long id);
+    CorreosDTO buscarCorreosAsociadosActivos(Long id);
+
+    //Buscar paciente por su id (para metodos de la clase y crear las consultas)
+    Paciente buscarPacientePorId(Long id);
 }

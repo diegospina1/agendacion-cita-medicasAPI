@@ -1,9 +1,8 @@
 package com.jddi.project.model.paciente;
 
-import com.jddi.project.model.persona.Persona;
+import com.jddi.project.model.datos.persona.Persona;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
