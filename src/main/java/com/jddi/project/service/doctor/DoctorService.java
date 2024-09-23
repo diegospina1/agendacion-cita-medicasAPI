@@ -2,26 +2,27 @@ package com.jddi.project.service.doctor;
 
 import com.jddi.project.dao.doctor.DoctorRepository;
 import com.jddi.project.mapper.DoctorMapper;
+import com.jddi.project.model.consulta.Consulta;
+import com.jddi.project.model.datos.contacto.email.dto.CorreosDTO;
+import com.jddi.project.model.datos.contacto.email.dto.crud.EmailDTO;
+import com.jddi.project.model.datos.contacto.email.rel.EmailPersona;
+import com.jddi.project.model.datos.contacto.telefono.dto.TelefonosDTO;
+import com.jddi.project.model.datos.contacto.telefono.dto.crud.TelefonoDTO;
+import com.jddi.project.model.datos.contacto.telefono.rel.TelefonoPersona;
+import com.jddi.project.model.datos.persona.Persona;
 import com.jddi.project.model.doctor.Doctor;
 import com.jddi.project.model.doctor.Especialidad;
 import com.jddi.project.model.doctor.dto.DatosDoctorDTO;
 import com.jddi.project.model.doctor.dto.crud.CDoctorDTO;
 import com.jddi.project.model.doctor.dto.crud.RDoctorDTO;
 import com.jddi.project.model.doctor.dto.crud.UDoctorDTO;
-import com.jddi.project.model.datos.contacto.email.dto.CorreosDTO;
-import com.jddi.project.model.datos.contacto.email.dto.crud.EmailDTO;
-import com.jddi.project.model.datos.contacto.email.rel.EmailPersona;
-import com.jddi.project.model.datos.persona.Persona;
-import com.jddi.project.model.datos.contacto.telefono.dto.TelefonosDTO;
-import com.jddi.project.model.datos.contacto.telefono.dto.crud.TelefonoDTO;
-import com.jddi.project.model.datos.contacto.telefono.rel.TelefonoPersona;
 import com.jddi.project.service.datos.contacto.IContactoService;
 import com.jddi.project.service.datos.persona.IPersonaService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -180,7 +181,11 @@ public class DoctorService implements IDoctorService{
     }
 
     @Override
-    public Doctor buscarDoctorDisponible(Especialidad especialidad, LocalDateTime fecha, LocalDateTime duracion) {
-        return repository.buscarDoctorDisponible(especialidad, fecha, duracion);
+    public Doctor buscarDoctorDisponible(Consulta consulta) {
+        Doctor doctor = repository.buscarDoctorDisponible(consulta);
+        if (doctor == null){
+            throw new ValidationException("no existen doctores disponibles para este horario y especialidad");
+        }
+        return doctor;
     }
 }

@@ -1,16 +1,14 @@
-package com.jddi.project.model.consulta.dto;
+package com.jddi.project.model.consulta.dto.crud;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jddi.project.model.doctor.Especialidad;
-import com.jddi.project.model.doctor.dto.crud.RDoctorDTO;
-import com.jddi.project.model.paciente.dto.crud.RPacienteDTO;
 
 import java.time.LocalDateTime;
 
-public record DatosConsultaDTO(
+public record RConsultaDTO(
         Long id,
-        RPacienteDTO informacion_paciente,
-        RDoctorDTO informacion_doctor,
+        Long paciente_id,
+        Long doctor_id,
         Especialidad especialidad,
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
         LocalDateTime fecha_consulta,

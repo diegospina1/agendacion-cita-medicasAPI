@@ -1,5 +1,6 @@
 package com.jddi.project.service.doctor;
 
+import com.jddi.project.model.consulta.Consulta;
 import com.jddi.project.model.doctor.Doctor;
 import com.jddi.project.model.doctor.Especialidad;
 import com.jddi.project.model.doctor.dto.DatosDoctorDTO;
@@ -49,5 +50,5 @@ public interface IDoctorService {
     //Buscar doctor por su id (para metodos de la clase y crear las consultas).
     Doctor buscarDoctorPorId(Long id);
 
-    Doctor buscarDoctorDisponible(Especialidad especialidad, LocalDateTime fecha, LocalDateTime duracion);
+    Doctor buscarDoctorDisponible(Consulta consulta);
 }

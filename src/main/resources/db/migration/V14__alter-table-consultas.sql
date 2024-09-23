@@ -1,0 +1,1 @@
+alter table consultas add ultima_modificacion datetime default current_timestamp not null;
