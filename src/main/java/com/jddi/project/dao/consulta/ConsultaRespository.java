@@ -18,8 +18,12 @@ import java.util.Optional;
 @Repository
 public interface ConsultaRespository extends JpaRepository<Consulta, Long> {
 
+    @Query("select c from Consulta c where c.paciente.id = :id and c.cancelada = false")
+    List<Consulta> encontrarTodasNoCanceladasPacienteId(Long id);
     List<Consulta> findAllByPacienteId(Long id);
 
+    @Query("select c from Consulta c where c.doctor.id = :id and c.cancelada = false")
+    List<Consulta> encontrarTodasNoCanceladasDoctorId(Long id);
     List<Consulta> findAllByDoctorId(Long id);
 
     @Query("select c from Consulta c where c.especialidad = :especialidad and c.cancelada = false")

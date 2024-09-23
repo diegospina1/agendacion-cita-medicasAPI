@@ -20,7 +20,7 @@ public class DoctorConConsulta implements ValidadorCondiciones {
 
     @Override
     public void validar(Consulta consulta) {
-        List<Consulta> consultasDoctor = consultaRespository.findAllByDoctorId(consulta.getDoctor().getId());
+        List<Consulta> consultasDoctor = consultaRespository.encontrarTodasNoCanceladasDoctorId(consulta.getDoctor().getId());
         for (Consulta consultaFor : consultasDoctor){
             if(consultaFor.getFecha_consulta().equals(consulta.getFecha_consulta()) && !consultaFor.equals(consulta)){
                 System.out.println(consultaFor.getId());

@@ -19,7 +19,7 @@ public class PacienteConConsulta implements ValidadorCondiciones {
 
     @Override
     public void validar(Consulta consulta) {
-        List<Consulta> consultasPaciente = consultaRespository.findAllByPacienteId(consulta.getPaciente().getId());
+        List<Consulta> consultasPaciente = consultaRespository.encontrarTodasNoCanceladasPacienteId(consulta.getPaciente().getId());
         for (Consulta consultaFor : consultasPaciente){
             if (consultaFor.getFecha_consulta().equals(consulta.getFecha_consulta()) && !consultaFor.equals(consulta)){
                 throw new ValidationException("El paciente ya tiene una consulta a esa hora.");
