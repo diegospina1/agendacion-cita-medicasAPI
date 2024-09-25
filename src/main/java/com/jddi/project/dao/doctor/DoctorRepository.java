@@ -17,6 +17,7 @@ import java.util.Optional;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
+    @Query("select d from Doctor d where d.especialidad = :filtro and d.persona.activo = true")
     List<Doctor> findAllByEspecialidad(Especialidad filtro);
 
     @Query("select d from Doctor d where d.persona.documento = :#{#documento}")
