@@ -23,6 +23,7 @@ import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,14 +45,19 @@ public class DoctorService implements IDoctorService{
 
     @Override
     public DatosDoctorDTO crear(CDoctorDTO datos) {
-        Persona persona = personaService.crear(datos.datosDoctor());
-        EmailPersona emailPersona = contactoService.asociarEmail(persona, new EmailDTO(datos.email()));
-        TelefonoPersona telefonoPersona = contactoService.asociarTelefono(persona, new TelefonoDTO(datos.telefono()));
-        Especialidad especialidad = Especialidad.valueOf(datos.especialidad().toUpperCase());
+        try{
+            Persona persona = personaService.crear(datos.datosDoctor());
+            EmailPersona emailPersona = contactoService.asociarEmail(persona, new EmailDTO(datos.email()));
+            TelefonoPersona telefonoPersona = contactoService.asociarTelefono(persona, new TelefonoDTO(datos.telefono()));
+            Especialidad especialidad = Especialidad.valueOf(datos.especialidad().toUpperCase());
 
-        Doctor doctor = repository.save(new Doctor(null, persona, especialidad));
+            Doctor doctor = repository.save(new Doctor(null, persona, especialidad));
 
-        return mapper.toDoctorDTO(doctor, emailPersona.getEmail(), telefonoPersona.getTelefono());
+            return mapper.toDoctorDTO(doctor, emailPersona.getEmail(), telefonoPersona.getTelefono());
+        } catch (Exception e) {
+            throw new ValidationException("Documento ya existe");
+        }
+
     }
 
     @Override

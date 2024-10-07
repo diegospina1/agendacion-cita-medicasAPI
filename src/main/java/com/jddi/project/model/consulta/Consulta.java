@@ -1,6 +1,5 @@
 package com.jddi.project.model.consulta;
 
-import com.jddi.project.model.consulta.dto.crud.UConsultaDTO;
 import com.jddi.project.model.doctor.Doctor;
 import com.jddi.project.model.doctor.Especialidad;
 import com.jddi.project.model.paciente.Paciente;
@@ -20,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Consulta {
+    //Datos generales de la consulta
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,9 +31,11 @@ public class Consulta {
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
     private LocalDateTime fecha_consulta;
+    //Creación y duración fechas
     @JoinColumn(name = "duracion")
     private LocalDateTime duracion;
     private LocalDateTime fecha_creacion;
+    //Cancelar
     private Boolean cancelada;
     private LocalDateTime ultima_modificacion;
 
@@ -54,6 +56,7 @@ public class Consulta {
         return Objects.equals(paciente, consulta.paciente) && Objects.equals(doctor, consulta.doctor) && especialidad == consulta.especialidad && Objects.equals(fecha_consulta, consulta.fecha_consulta) && Objects.equals(duracion, consulta.duracion);
     }
 
+    //Genereamos un identificador unico para el objeto en memoria.
     @Override
     public int hashCode() {
         return Objects.hash(paciente, doctor, especialidad, fecha_consulta, duracion);

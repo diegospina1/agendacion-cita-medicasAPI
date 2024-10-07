@@ -25,4 +25,5 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
 
+
 }

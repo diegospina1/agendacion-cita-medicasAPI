@@ -5,8 +5,10 @@ import jakarta.validation.constraints.Pattern;
 
 public record CPersonaDTO(
         @NotBlank
+        @Pattern(regexp = "^[A-Za-z]+$")
         String nombre,
         @NotBlank
+        @Pattern(regexp = "^[A-Za-z]+$")
         String apellido,
         @NotBlank
         @Pattern(regexp = "^\\d{10}$")

@@ -14,6 +14,7 @@ public record CConsultaDTO(
         @Future
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
         LocalDateTime fecha,
+        @NotNull
         Especialidad especialidad
 ) {
 }
