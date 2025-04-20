@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jddi</groupId>
-    <artifactId>project</artifactId>
+    <artifactId>agendacion-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>project</name>
     <description>API para agendar consultas en un centro médico.</description>

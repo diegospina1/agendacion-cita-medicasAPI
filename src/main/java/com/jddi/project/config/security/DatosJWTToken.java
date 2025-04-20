@@ -1,4 +1,4 @@
 package com.jddi.project.config.security;
 
-public record DatosJWTToken(String jwTtoken) {
+public record DatosJWTToken(String token) {
 }

@@ -7,11 +7,14 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jddi.project.model.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class TokenService {
@@ -24,15 +27,26 @@ public class TokenService {
     public String generarToken(Usuario usuario){
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
-            return JWT.create().withIssuer("XIII")
+            return JWT.create()
+                    .withIssuer("XIII")
                     .withSubject(usuario.getLogin())
                     .withClaim("id", usuario.getId())
+                    .withClaim("roles", getClaims(usuario))
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
         } catch (JWTCreationException e){
             throw new RuntimeException();
         }
     }
+
+    private List<String> getClaims(Usuario usuario){
+        Collection<? extends GrantedAuthority> authorities = usuario.getAuthorities();
+        return authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+    }
+
+
     //Dos horas desde el instante actual, es el tiempo de vida del token
     private Instant generarFechaExpiracion(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-05:00"));
